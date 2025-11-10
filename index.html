@@ -55,14 +55,8 @@
   </table>
 
   <script>
-  
-  const LIFF_ID = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=liff')
-  .then(res => res.json()).then(data => data.liffId);
-  const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl')
-  .then(res => res.json()).then(data => data.gasURL);
-
-
-
+  const LIFF_ID = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=liff').then(res => res.json()).then(data => data.liffId);
+  const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
 
     async function isUserAllowed(userId) {
       const res = await fetch(`${GAS_URL}?userId=${userId}`);
