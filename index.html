@@ -55,16 +55,18 @@
   </table>
 
   <script>
-  const LIFF_ID = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=liff').then(res => res.json()).then(data => data.liffId);
-  const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
+  
+  
 
     async function isUserAllowed(userId) {
+      const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
       const res = await fetch(`${GAS_URL}?userId=${userId}`);
       const data = await res.json();
       return data.allowed;
     }
 
     async function loadRecords(userId) {
+      const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
       const res = await fetch(`${GAS_URL}?userId=${userId}`);
       const data = await res.json();
 
@@ -84,7 +86,7 @@
 
     async function startCheckIn() {
       document.getElementById('message').innerText = '開始打卡流程...';
-
+      const LIFF_ID = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=liff').then(res => res.json()).then(data => data.liffId);
       await liff.init({ liffId: LIFF_ID });
       if (!liff.isLoggedIn()) {
         liff.login();
