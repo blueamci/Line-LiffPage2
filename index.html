@@ -120,7 +120,7 @@
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json' }
-          };
+          });
           //const result = await res.json();
           //document.getElementById('message').innerText = `✅ ${result.status}`;
           await loadRecords(userId);
@@ -133,7 +133,7 @@
       //}, function(error) {
         //document.getElementById('message').innerText = '❌ 無法取得定位：' + error.message;
       //});
-    })
+    });
   </script>
 </body>
 </html>
