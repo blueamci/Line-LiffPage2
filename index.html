@@ -120,7 +120,7 @@
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json' }
-          });
+          };
           //const result = await res.json();
           //document.getElementById('message').innerText = `✅ ${result.status}`;
           await loadRecords(userId);
@@ -129,7 +129,7 @@
         //} catch (err) {
           //document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
           //console.error('打卡失敗:', err);
-        }
+        
       //}, function(error) {
         //document.getElementById('message').innerText = '❌ 無法取得定位：' + error.message;
       //});
