@@ -55,7 +55,7 @@
 
   <script>
   
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwqfMkNG78X9pDxEKozKRYE2lKnI4eccO4E1l0CBKuqfLPOZBxt6euLU49Uj34NYy35cw/exec'
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwqfMkNG78X9pDxEKozKRYE2lKnI4eccO4E1l0CBKuqfLPOZBxt6euLU49Uj34NYy35cw/exec';
 
     async function isUserAllowed(userId) {
       //const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
@@ -85,8 +85,7 @@
 
     async function startCheckIn() {
       document.getElementById('message').innerText = '開始打卡流程...';
-      const LIFF_ID = '2007367348-DMQKmVMy';
-      await liff.init({ liffId: LIFF_ID });
+      await liff.init({ liffId: '2007367348-DMQKmVMy' });
       if (!liff.isLoggedIn()) {
         liff.login();
         return;
