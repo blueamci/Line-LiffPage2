@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>資料輸入</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h2>資料輸入</h2>
+
+  <label for="checkinType">打卡類型：</label>
+  <select id="checkinType">
+    <option value="上班">上班</option>
+    <option value="下班">下班</option>
+    <option value="外出">外出</option>
+  </select>
+
+  <br><br>
+
+  <label for="locationType">地點分類：</label>
+  <select id="locationType">
+    <option value="辦公室">辦公室</option>
+    <option value="客戶端">客戶端</option>
+    <option value="其他">其他</option>
+  </select>
+
+  <br><br>
+
+  <label for="taskType">任務類型：</label>
+  <select id="taskType">
+    <option value="巡檢">巡檢</option>
+    <option value="維修">維修</option>
+    <option value="會議">會議</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="startCheckIn()">打卡</button>
+
+  <div id="message" style="margin-top:20px; font-weight:bold;"></div>
+
+  <h3>最近打卡紀錄</h3>
+  <table border="1" id="recordTable" style="border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>時間</th>
+        <th>緯度</th>
+        <th>經度</th>
+        <th>類型</th>
+        <th>地點</th>
+        <th>任務</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const LIFF_ID = '<?= LIFF_ID ?>';
+    const GAS_URL = '<?= GAS_URL ?>';
+
+    async function isUserAllowed(userId) {
+      const res = await fetch(`${GAS_URL}?userId=${userId}`);
+      const data = await res.json();
+      return data.allowed;
+    }
+
+    async function loadRecords(userId) {
+      const res = await fetch(`${GAS_URL}?userId=${userId}`);
+      const data = await res.json();
+
+      const tbody = document.querySelector('#recordTable tbody');
+      tbody.innerHTML = '';
+
+      data.records.forEach(row => {
+        const tr = document.createElement('tr');
+        row.slice(0, 6).forEach(cell => {
+          const td = document.createElement('td');
+          td.innerText = cell;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function startCheckIn() {
+      document.getElementById('message').innerText = '開始打卡流程...';
+
+      await liff.init({ liffId: LIFF_ID });
+      if (!liff.isLoggedIn()) {
+        liff.login();
+        return;
+      }
+
+      const profile = await liff.getProfile();
+      const userId = profile.userId;
+      document.getElementById('message').innerText = `使用者 ID：${userId}`;
+
+      const allowed = await isUserAllowed(userId);
+      if (!allowed) {
+        document.getElementById('message').innerText = '❌ 您不在打卡白名單中';
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async function(position) {
+        const payload = {
+          userId,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          timestamp: new Date().toISOString(),
+          checkinType: document.getElementById('checkinType').value,
+          locationType: document.getElementById('locationType').value,
+          taskType: document.getElementById('taskType').value
+        };
+
+        try {
+          const res = await fetch(GAS_URL, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'application/json' }
+          });
+          const result = await res.json();
+          document.getElementById('message').innerText = `✅ ${result.status}`;
+          await loadRecords(userId);
+        } catch (err) {
+          document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
+          console.error('打卡失敗:', err);
+        }
+      }, function(error) {
+        document.getElementById('message').innerText = '❌ 無法取得定位：' + error.message;
+      });
+    }
+  </script>
+</body>
+</html>
