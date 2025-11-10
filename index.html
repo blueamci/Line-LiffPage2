@@ -114,25 +114,25 @@
           taskType: document.getElementById('taskType').value
         };
     alert(JSON.stringify(payload));
-        try {
+        //try {
           const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
-          const res = await fetch(GAS_URL, {
+          fetch(GAS_URL, {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json' }
           });
-          const result = await res.json();
-          document.getElementById('message').innerText = `✅ ${result.status}`;
+          //const result = await res.json();
+          //document.getElementById('message').innerText = `✅ ${result.status}`;
           await loadRecords(userId);
           alert(result)
           alert(loadRecords)
-        } catch (err) {
-          document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
-          console.error('打卡失敗:', err);
+        //} catch (err) {
+          //document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
+          //console.error('打卡失敗:', err);
         }
-      }, function(error) {
-        document.getElementById('message').innerText = '❌ 無法取得定位：' + error.message;
-      });
+      //}, function(error) {
+        //document.getElementById('message').innerText = '❌ 無法取得定位：' + error.message;
+      //});
     }
   </script>
 </body>
