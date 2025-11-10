@@ -96,6 +96,8 @@
       document.getElementById('message').innerText = `使用者 ID：${userId}`;
 
       const allowed = await isUserAllowed(userId);
+      alert(allowed);
+      
       if (!allowed) {
         document.getElementById('message').innerText = '❌ 您不在打卡白名單中';
         return;
