@@ -12,13 +12,28 @@
       padding: 20px;
       max-width: 600px;
       margin: auto;
+      text-align: center;
     }
 
-    label, select, button {
-      display: block;
-      width: 100%;
-      margin-bottom: 20px;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    select {
       font-size: 1.2rem;
+      padding: 10px;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 10px;
+      text-align: center;
+      text-align-last: center;
     }
 
     button {
@@ -28,6 +43,9 @@
       border: none;
       border-radius: 6px;
       font-size: 1.2rem;
+      margin-top: 30px;
+      width: 100%;
+      max-width: 400px;
     }
 
     #message {
@@ -39,7 +57,7 @@
     table {
       width: 100%;
       font-size: 1rem;
-      margin-top: 20px;
+      margin-top: 30px;
       border-collapse: collapse;
       overflow-x: auto;
       display: block;
@@ -60,6 +78,7 @@
 <body>
   <h2>資料輸入</h2>
 
+<form>
   <label for="checkinType">打卡類型：</label>
   <select id="checkinType">
     <option value="上班">上班</option>
@@ -81,7 +100,8 @@
     <option value="會議">會議</option>
   </select>
 
-  <button onclick="startCheckIn()">打卡</button>
+  <button type="button" onclick="startCheckIn()">打卡</button>
+</form>
 
   <div id="message"></div>
 
