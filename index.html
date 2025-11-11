@@ -83,7 +83,7 @@
   </style>  
 </head>
 <body>
-  <h2>資料輸入</h2>
+  <h2>資料輸入1812</h2>
 
 <form>
   <label for="checkinType">打卡類型：</label>
@@ -203,8 +203,8 @@
           });
           const result = await res.json();
           document.getElementById('message').innerText = `✅ ${result.status}`;
-          alert(latitude);
-          showMap(latitude, longitude);
+          alert(payload.latitude);
+          showMap(payload.latitude, payload.longitude);
           await loadRecords(userId);
         } catch (err) {
           document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
