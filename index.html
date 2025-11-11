@@ -55,7 +55,7 @@
 
   <script>
   
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzIMB3db8Rem-t4X1dwNZaBol7Z2Sgu5tgy2jnaV7PxLNZcXlxrJEih2tPePgdrEfUzDA/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzkjWYyYKfZKYEs93rfeVepSel4-Dw0kfl4sG_10cgeg6tV-Ktv4thfhCcP7acZIYuykQ/exec';
 
     async function isUserAllowed(userId) {
       //const GAS_URL = await fetch('https://script.google.com/macros/s/AKfycbwXy6qlwP8Isq10J3crMheIGU4btIxHkcoOPppL1-DPI66RYuw5yUnV_EE7SG6QxemK6Q/exec?get=gasurl').then(res => res.json()).then(data => data.gasURL);
@@ -119,7 +119,8 @@
           fetch(GAS_URL, {
             method: 'POST',
             body: JSON.stringify(payload),
-            headers: { 'Content-Type': 'application/json' }
+            //headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }            
           });
           //const result = await res.json();
           //document.getElementById('message').innerText = `✅ ${result.status}`;
