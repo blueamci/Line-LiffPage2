@@ -54,6 +54,13 @@
       font-size: 1.2rem;
     }
 
+    #map {
+      margin-top: 20px;
+      width: 100%;
+      height: 300px;
+      border: 1px solid #ccc;
+    }
+
     table {
       width: 100%;
       font-size: 1rem;
@@ -102,9 +109,8 @@
 
   <button type="button" onclick="startCheckIn()">打卡</button>
 </form>
-
   <div id="message"></div>
-
+  <div id="map"></div>
   <h3>最近打卡紀錄</h3>
   <table id="recordTable">
     <thead>
@@ -150,6 +156,12 @@
       });
     }
 
+    function showMap(lat, lng) {
+      const mapDiv = document.getElementById('map');
+      const mapUrl = `https://maps.google.com/maps?q=${lat},${lng}&hl=zh-TW&z=16&output=embed`;
+      mapDiv.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapUrl}" allowfullscreen></iframe>`;
+    }
+    
     async function startCheckIn() {
       document.getElementById('message').innerText = '開始打卡流程...';
       await liff.init({ liffId: '2007367348-DMQKmVMy' });
@@ -191,9 +203,9 @@
           });
           const result = await res.json();
           document.getElementById('message').innerText = `✅ ${result.status}`;
+          alert(latitude);
+          showMap(latitude, longitude);
           await loadRecords(userId);
-          alert(result)
-          alert(loadRecords);
         } catch (err) {
           document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
           console.error('打卡失敗:', err);
