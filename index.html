@@ -197,6 +197,7 @@
           document.getElementById('message').innerText = `✅ ${result.status}`;
           showMap(payload.latitude, payload.longitude);
           await loadRecords(userId);
+          alert("已完成");
         } catch (err) {
           document.getElementById('message').innerText = '❌ 打卡失敗，請稍後再試';
           console.error('打卡失敗:', err);
