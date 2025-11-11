@@ -1,8 +1,61 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>資料輸入</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: 1.2rem;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    label, select, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.2rem;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    table {
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 20px;
+      border-collapse: collapse;
+      overflow-x: auto;
+      display: block;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    h2, h3 {
+      font-size: 1.5rem;
+      margin-top: 30px;
+    }
+  </style>  
 </head>
 <body>
   <h2>資料輸入</h2>
@@ -14,16 +67,12 @@
     <option value="外出">外出</option>
   </select>
 
-  <br><br>
-
   <label for="locationType">地點分類：</label>
   <select id="locationType">
     <option value="辦公室">辦公室</option>
     <option value="客戶端">客戶端</option>
     <option value="其他">其他</option>
   </select>
-
-  <br><br>
 
   <label for="taskType">任務類型：</label>
   <select id="taskType">
@@ -32,14 +81,12 @@
     <option value="會議">會議</option>
   </select>
 
-  <br><br>
-
   <button onclick="startCheckIn()">打卡</button>
 
-  <div id="message" style="margin-top:20px; font-weight:bold;"></div>
+  <div id="message"></div>
 
   <h3>最近打卡紀錄</h3>
-  <table border="1" id="recordTable" style="border-collapse:collapse;">
+  <table id="recordTable">
     <thead>
       <tr>
         <th>時間</th>
